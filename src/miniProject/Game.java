@@ -17,17 +17,17 @@ public class Game extends JFrame {
     JLabel count, problem;
 
     private int setNum() {
-        while (true){
-        try {
-            sc = new Scanner(System.in);
-            int num = sc.nextInt();
-            if(spentTime>=30){
-                return 0;
+        while (true) {
+            try {
+                sc = new Scanner(System.in);
+                int num = sc.nextInt();
+                if (spentTime >= 30) {
+                    return 0;
+                }
+                return num;
+            } catch (InputMismatchException e) {
+                System.out.println("[ERROR] 숫자를 입력해주세요.");
             }
-            return num;
-        } catch (InputMismatchException e) {
-            System.out.println("[ERROR] 숫자를 입력해주세요.");
-        }
         }
 
     }
@@ -47,7 +47,7 @@ public class Game extends JFrame {
                 soc = level(50, 4);
                 break;
         }
-        soc=soc*i;
+        soc = soc * i;
         switch (item) {
 
             case 1:
@@ -89,82 +89,83 @@ public class Game extends JFrame {
             System.exit(0);
         }
     }
-        private int level(int round, int operations) {
-            Random r = new Random();
-            GameT game= new GameT();;
-            int sum = 0;
-            int sum1 ;
-            int count = 0;
-            game.start();
-            for (i = 0; i < 30; i++) {
 
-                int x = r.nextInt(round) + 1;
-                int y = r.nextInt(round) + 1;
-                int mu = r.nextInt(operations) + 1;
-                String str = null;
+    private int level(int round, int operations) {
+        Random r = new Random();
+        GameT game = new GameT();
+        ;
+        int sum = 0;
+        int sum1;
+        int count = 0;
+        game.start();
+        for (i = 0; i < 30; i++) {
 
-                switch (mu) {
+            int x = r.nextInt(round) + 1;
+            int y = r.nextInt(round) + 1;
+            int mu = r.nextInt(operations) + 1;
+            String str = null;
 
-                    case 1:
-                        sum = x + y;
-                        str = x + "+" + y + "=";
-                        System.out.print(str);
-                        break;
-                    case 2:
-                        sum = x - y;
-                        str = x + "-" + y + "=";
-                        System.out.print(str);
-                        break;
-                    case 3:
-                        sum = x * y;
-                        str = x + "*" + y + "=";
-                        System.out.print(str);
-                        break;
-                    case 4:
-                        while (true) {
-                            if (x % y == 0) {
-                                break;
-                            }
-                            x = r.nextInt(round) + 1;
-                            y = r.nextInt(round) + 1;
-                        }
-                        sum = x / y;
-                        str = x + "/" + y + "=";
-                        System.out.print(str);
+            switch (mu) {
 
-                        break;
-
-                }
-
-
-                while (true) {
-
-                    try {
-                        sum1 = setNum();
-                        break;
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("[ERROR] 숫자를 입력해주세요.");
-
-                    }
+                case 1:
+                    sum = x + y;
+                    str = x + "+" + y + "=";
                     System.out.print(str);
-                }
+                    break;
+                case 2:
+                    sum = x - y;
+                    str = x + "-" + y + "=";
+                    System.out.print(str);
+                    break;
+                case 3:
+                    sum = x * y;
+                    str = x + "*" + y + "=";
+                    System.out.print(str);
+                    break;
+                case 4:
+                    while (true) {
+                        if (x % y == 0) {
+                            break;
+                        }
+                        x = r.nextInt(round) + 1;
+                        y = r.nextInt(round) + 1;
+                    }
+                    sum = x / y;
+                    str = x + "/" + y + "=";
+                    System.out.print(str);
 
-                if(i==30){
-                    System.out.println("시간 초과 입니다");
-                }
-                else if (sum == sum1) {
-                    System.out.println("정답입니다");
-                    count++;
-                } else {
-
-                    System.out.println("오답입니다");
-                    System.out.println("정답은 " + sum + "입니다");
-                }
-                time = 0;
-                System.out.println();
+                    break;
 
             }
-            game.interrupt();
-            return count;
+
+
+            while (true) {
+
+                try {
+                    sum1 = setNum();
+                    break;
+                } catch (IllegalArgumentException e) {
+                    System.out.println("[ERROR] 숫자를 입력해주세요.");
+
+                }
+                System.out.print(str);
+            }
+
+            if (i == 30) {
+                System.out.println("시간 초과 입니다");
+            } else if (sum == sum1) {
+                System.out.println("정답입니다");
+                count++;
+            } else {
+
+                System.out.println("오답입니다");
+                System.out.println("정답은 " + sum + "입니다");
+            }
+            time = 0;
+            System.out.println();
+
         }
+        game.interrupt();
+        return count;
     }
+}
